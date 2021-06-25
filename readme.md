@@ -11,12 +11,12 @@ Firstly I get the necessary parts which they:
 * Raspberry Power cable
 
 After getting equipments, firstly enable the ssh for the raspberry and then tried on and off led from the GPIO library in python. It has few codes like:
-
+```
 >import RPi.GPIO as GPIO
 >GPIO.setmode(GPIO.BCM)
 >GPIO.setup(32, GPIO.OUT)
 >GPIO.output(32, True)
-
+```
 This will turn on the led, after this process I started to researching about linux pins and I found this link:
 
 [LINUX PINS](https://www.kernel.org/doc/Documentation/gpio/sysfs.txt)
