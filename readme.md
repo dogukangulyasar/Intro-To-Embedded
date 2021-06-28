@@ -38,15 +38,16 @@ After spend some time on this process, I decide to make a script for make automa
 #Button.sh
 
 **button.sh** file is created for the turn on or off from the physical button. I created this file as an dynamic script it has 3 different parameters for the running it.
-
+```
 >$1 -> pin number of the buton
 >$2 -> path of the PINON.sh script
 >$3 -> pin number of the led
-
+```
 It's usage is:
+```
 >chmod +x button.sh
 >sudo ./button.sh 5(button pin no) /home/desktop/.../(PINON.sh path) 18(led pin no)
-
+````
 
 
 
