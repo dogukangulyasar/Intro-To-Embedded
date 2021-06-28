@@ -33,7 +33,7 @@ After spend some time on this process, I decide to make a script for make automa
 >./pinon.sh *PINNUMBER* *on/off*
 >./pinon.sh 18 on
 >./pinon.sh 18 off
-<<<<<<< HEAD
+
 
 #Button.sh
 
@@ -44,12 +44,8 @@ After spend some time on this process, I decide to make a script for make automa
 >$3 -> pin number of the led
 
 It's usage is:
-
 >chmod +x button.sh
 >sudo ./button.sh 5(button pin no) /home/desktop/.../(PINON.sh path) 18(led pin no)
-=======
-```
->>>>>>> 0fab5a68d1d233c91e92e9ecd65d4928189c8179
 
 
 
