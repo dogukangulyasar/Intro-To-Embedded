@@ -35,7 +35,7 @@ After spend some time on this process, I decide to make a script for make automa
 >./pinon.sh 18 off
 ```
 
-#Button.sh
+## Button.sh
 
 **button.sh** file is created for the turn on or off from the physical button. I created this file as an dynamic script it has 3 different parameters for the running it.
 ```
@@ -47,9 +47,9 @@ It's usage is:
 ```
 >chmod +x button.sh
 >sudo ./button.sh 5(button pin no) /home/desktop/.../(PINON.sh path) 18(led pin no)
+```
 
-
-#Raspberry Pi 3 B+ Qt Cross Compile Documentation (Part 2)
+# Raspberry Pi 3 B+ Qt Cross Compile Documentation (Part 2)
 
 There are really important steps in there. Firstly need to boot the rapsberry with the raspbian os using imager
 
@@ -77,7 +77,7 @@ Then enable the SSH
 
 After enable the SSH there are some steps between host pc and the pi. I am seperating them with the **[HOST]** **[PI]**. Host for host pc, PI for the raspbian.
 
-##[PI]
+## [PI]
 Need to enable build-dep installation for the installing some libraries.
 
 ```
@@ -104,7 +104,7 @@ Create a directory from the raspbian
 
 Congratulations you completed the PI part mostly :)
 
-##[HOST]
+## [HOST]
 
 Create directories at the **home** of host pc and clone the tools for the raspberrypi from git.
 
