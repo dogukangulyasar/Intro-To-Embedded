@@ -52,17 +52,21 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = Fileoperations.cpp \
+SOURCES       = Buttoncontrol.cpp \
+		Fileoperations.cpp \
 		Led.cpp \
 		main.cpp qrc_qml.cpp \
 		qrc_images.cpp \
+		moc_Buttoncontrol.cpp \
 		moc_Fileoperations.cpp \
 		moc_Led.cpp
-OBJECTS       = Fileoperations.o \
+OBJECTS       = Buttoncontrol.o \
+		Fileoperations.o \
 		Led.o \
 		main.o \
 		qrc_qml.o \
 		qrc_images.o \
+		moc_Buttoncontrol.o \
 		moc_Fileoperations.o \
 		moc_Led.o
 DIST          = ../../qt5/mkspecs/features/spec_pre.prf \
@@ -236,8 +240,10 @@ DIST          = ../../qt5/mkspecs/features/spec_pre.prf \
 		../../qt5/mkspecs/features/exceptions.prf \
 		../../qt5/mkspecs/features/yacc.prf \
 		../../qt5/mkspecs/features/lex.prf \
-		LedControl.pro Fileoperations.h \
-		Led.h Fileoperations.cpp \
+		LedControl.pro Buttoncontrol.h \
+		Fileoperations.h \
+		Led.h Buttoncontrol.cpp \
+		Fileoperations.cpp \
 		Led.cpp \
 		main.cpp
 QMAKE_TARGET  = LedControl
@@ -616,8 +622,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents qml.qrc images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Fileoperations.h Led.h $(DISTDIR)/
-	$(COPY_FILE) --parents Fileoperations.cpp Led.cpp main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents Buttoncontrol.h Fileoperations.h Led.h $(DISTDIR)/
+	$(COPY_FILE) --parents Buttoncontrol.cpp Fileoperations.cpp Led.cpp main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -661,9 +667,67 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../qt5/mkspecs/features/data/dummy.cpp
 	/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-g++ -pipe -marm -mfpu=vfp -mtune=arm1176jzf-s -march=armv6zk -mabi=aapcs-linux -mfloat-abi=hard --sysroot=/home/dgulyasar/raspi/sysroot -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h ../../qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Fileoperations.cpp moc_Led.cpp
+compiler_moc_header_make_all: moc_Buttoncontrol.cpp moc_Fileoperations.cpp moc_Led.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Fileoperations.cpp moc_Led.cpp
+	-$(DEL_FILE) moc_Buttoncontrol.cpp moc_Fileoperations.cpp moc_Led.cpp
+moc_Buttoncontrol.cpp: Buttoncontrol.h \
+		../../qt5pi/include/QtCore/QTimer \
+		../../qt5pi/include/QtCore/qtimer.h \
+		../../qt5pi/include/QtCore/qglobal.h \
+		../../qt5pi/include/QtCore/qconfig-bootstrapped.h \
+		../../qt5pi/include/QtCore/qconfig.h \
+		../../qt5pi/include/QtCore/qtcore-config.h \
+		../../qt5pi/include/QtCore/qsystemdetection.h \
+		../../qt5pi/include/QtCore/qprocessordetection.h \
+		../../qt5pi/include/QtCore/qcompilerdetection.h \
+		../../qt5pi/include/QtCore/qtypeinfo.h \
+		../../qt5pi/include/QtCore/qsysinfo.h \
+		../../qt5pi/include/QtCore/qlogging.h \
+		../../qt5pi/include/QtCore/qflags.h \
+		../../qt5pi/include/QtCore/qatomic.h \
+		../../qt5pi/include/QtCore/qbasicatomic.h \
+		../../qt5pi/include/QtCore/qatomic_bootstrap.h \
+		../../qt5pi/include/QtCore/qgenericatomic.h \
+		../../qt5pi/include/QtCore/qatomic_cxx11.h \
+		../../qt5pi/include/QtCore/qatomic_msvc.h \
+		../../qt5pi/include/QtCore/qglobalstatic.h \
+		../../qt5pi/include/QtCore/qmutex.h \
+		../../qt5pi/include/QtCore/qnumeric.h \
+		../../qt5pi/include/QtCore/qversiontagging.h \
+		../../qt5pi/include/QtCore/qbasictimer.h \
+		../../qt5pi/include/QtCore/qnamespace.h \
+		../../qt5pi/include/QtCore/qobject.h \
+		../../qt5pi/include/QtCore/qobjectdefs.h \
+		../../qt5pi/include/QtCore/qobjectdefs_impl.h \
+		../../qt5pi/include/QtCore/qstring.h \
+		../../qt5pi/include/QtCore/qchar.h \
+		../../qt5pi/include/QtCore/qbytearray.h \
+		../../qt5pi/include/QtCore/qrefcount.h \
+		../../qt5pi/include/QtCore/qarraydata.h \
+		../../qt5pi/include/QtCore/qstringliteral.h \
+		../../qt5pi/include/QtCore/qstringalgorithms.h \
+		../../qt5pi/include/QtCore/qstringview.h \
+		../../qt5pi/include/QtCore/qstringbuilder.h \
+		../../qt5pi/include/QtCore/qlist.h \
+		../../qt5pi/include/QtCore/qalgorithms.h \
+		../../qt5pi/include/QtCore/qiterator.h \
+		../../qt5pi/include/QtCore/qhashfunctions.h \
+		../../qt5pi/include/QtCore/qpair.h \
+		../../qt5pi/include/QtCore/qbytearraylist.h \
+		../../qt5pi/include/QtCore/qstringlist.h \
+		../../qt5pi/include/QtCore/qregexp.h \
+		../../qt5pi/include/QtCore/qstringmatcher.h \
+		../../qt5pi/include/QtCore/qcoreevent.h \
+		../../qt5pi/include/QtCore/qscopedpointer.h \
+		../../qt5pi/include/QtCore/qmetatype.h \
+		../../qt5pi/include/QtCore/qvarlengtharray.h \
+		../../qt5pi/include/QtCore/qcontainerfwd.h \
+		../../qt5pi/include/QtCore/qobject_impl.h \
+		../../qt5pi/include/QtCore/QObject \
+		moc_predefs.h \
+		../../qt5/bin/moc
+	/home/dgulyasar/raspi/qt5/bin/moc $(DEFINES) --include /home/dgulyasar/raspi/qtProjects/LedControl/moc_predefs.h -I/home/dgulyasar/raspi/qt5/mkspecs/devices/linux-rasp-pi-g++ -I/home/dgulyasar/raspi/qtProjects/LedControl -I/home/dgulyasar/raspi/qt5pi/include -I/home/dgulyasar/raspi/qt5pi/include/QtQuick -I/home/dgulyasar/raspi/qt5pi/include/QtGui -I/home/dgulyasar/raspi/qt5pi/include/QtQml -I/home/dgulyasar/raspi/qt5pi/include/QtNetwork -I/home/dgulyasar/raspi/qt5pi/include/QtCore -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3 -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/arm-linux-gnueabihf -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/backward -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include-fixed -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include -I/home/dgulyasar/raspi/sysroot/usr/include -I/home/dgulyasar/raspi/sysroot/usr/include/arm-linux-gnueabihf Buttoncontrol.h -o moc_Buttoncontrol.cpp
+
 moc_Fileoperations.cpp: Fileoperations.h \
 		../../qt5pi/include/QtCore/QObject \
 		../../qt5pi/include/QtCore/qobject.h \
@@ -771,6 +835,10 @@ moc_Led.cpp: Led.h \
 		../../qt5pi/include/QtCore/qcontainerfwd.h \
 		../../qt5pi/include/QtCore/qobject_impl.h \
 		Fileoperations.h \
+		Buttoncontrol.h \
+		../../qt5pi/include/QtCore/QTimer \
+		../../qt5pi/include/QtCore/qtimer.h \
+		../../qt5pi/include/QtCore/qbasictimer.h \
 		moc_predefs.h \
 		../../qt5/bin/moc
 	/home/dgulyasar/raspi/qt5/bin/moc $(DEFINES) --include /home/dgulyasar/raspi/qtProjects/LedControl/moc_predefs.h -I/home/dgulyasar/raspi/qt5/mkspecs/devices/linux-rasp-pi-g++ -I/home/dgulyasar/raspi/qtProjects/LedControl -I/home/dgulyasar/raspi/qt5pi/include -I/home/dgulyasar/raspi/qt5pi/include/QtQuick -I/home/dgulyasar/raspi/qt5pi/include/QtGui -I/home/dgulyasar/raspi/qt5pi/include/QtQml -I/home/dgulyasar/raspi/qt5pi/include/QtNetwork -I/home/dgulyasar/raspi/qt5pi/include/QtCore -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3 -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/arm-linux-gnueabihf -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include/c++/4.8.3/backward -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/lib/gcc/arm-linux-gnueabihf/4.8.3/include-fixed -I/home/dgulyasar/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/arm-linux-gnueabihf/include -I/home/dgulyasar/raspi/sysroot/usr/include -I/home/dgulyasar/raspi/sysroot/usr/include/arm-linux-gnueabihf Led.h -o moc_Led.cpp
@@ -788,6 +856,77 @@ compiler_lex_clean:
 compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
+
+Buttoncontrol.o: Buttoncontrol.cpp Buttoncontrol.h \
+		../../qt5pi/include/QtCore/QTimer \
+		../../qt5pi/include/QtCore/qtimer.h \
+		../../qt5pi/include/QtCore/qglobal.h \
+		../../qt5pi/include/QtCore/qconfig-bootstrapped.h \
+		../../qt5pi/include/QtCore/qconfig.h \
+		../../qt5pi/include/QtCore/qtcore-config.h \
+		../../qt5pi/include/QtCore/qsystemdetection.h \
+		../../qt5pi/include/QtCore/qprocessordetection.h \
+		../../qt5pi/include/QtCore/qcompilerdetection.h \
+		../../qt5pi/include/QtCore/qtypeinfo.h \
+		../../qt5pi/include/QtCore/qsysinfo.h \
+		../../qt5pi/include/QtCore/qlogging.h \
+		../../qt5pi/include/QtCore/qflags.h \
+		../../qt5pi/include/QtCore/qatomic.h \
+		../../qt5pi/include/QtCore/qbasicatomic.h \
+		../../qt5pi/include/QtCore/qatomic_bootstrap.h \
+		../../qt5pi/include/QtCore/qgenericatomic.h \
+		../../qt5pi/include/QtCore/qatomic_cxx11.h \
+		../../qt5pi/include/QtCore/qatomic_msvc.h \
+		../../qt5pi/include/QtCore/qglobalstatic.h \
+		../../qt5pi/include/QtCore/qmutex.h \
+		../../qt5pi/include/QtCore/qnumeric.h \
+		../../qt5pi/include/QtCore/qversiontagging.h \
+		../../qt5pi/include/QtCore/qbasictimer.h \
+		../../qt5pi/include/QtCore/qnamespace.h \
+		../../qt5pi/include/QtCore/qobject.h \
+		../../qt5pi/include/QtCore/qobjectdefs.h \
+		../../qt5pi/include/QtCore/qobjectdefs_impl.h \
+		../../qt5pi/include/QtCore/qstring.h \
+		../../qt5pi/include/QtCore/qchar.h \
+		../../qt5pi/include/QtCore/qbytearray.h \
+		../../qt5pi/include/QtCore/qrefcount.h \
+		../../qt5pi/include/QtCore/qarraydata.h \
+		../../qt5pi/include/QtCore/qstringliteral.h \
+		../../qt5pi/include/QtCore/qstringalgorithms.h \
+		../../qt5pi/include/QtCore/qstringview.h \
+		../../qt5pi/include/QtCore/qstringbuilder.h \
+		../../qt5pi/include/QtCore/qlist.h \
+		../../qt5pi/include/QtCore/qalgorithms.h \
+		../../qt5pi/include/QtCore/qiterator.h \
+		../../qt5pi/include/QtCore/qhashfunctions.h \
+		../../qt5pi/include/QtCore/qpair.h \
+		../../qt5pi/include/QtCore/qbytearraylist.h \
+		../../qt5pi/include/QtCore/qstringlist.h \
+		../../qt5pi/include/QtCore/qregexp.h \
+		../../qt5pi/include/QtCore/qstringmatcher.h \
+		../../qt5pi/include/QtCore/qcoreevent.h \
+		../../qt5pi/include/QtCore/qscopedpointer.h \
+		../../qt5pi/include/QtCore/qmetatype.h \
+		../../qt5pi/include/QtCore/qvarlengtharray.h \
+		../../qt5pi/include/QtCore/qcontainerfwd.h \
+		../../qt5pi/include/QtCore/qobject_impl.h \
+		../../qt5pi/include/QtCore/QObject \
+		../../qt5pi/include/QtCore/QDebug \
+		../../qt5pi/include/QtCore/qdebug.h \
+		../../qt5pi/include/QtCore/qhash.h \
+		../../qt5pi/include/QtCore/qmap.h \
+		../../qt5pi/include/QtCore/qtextstream.h \
+		../../qt5pi/include/QtCore/qiodevice.h \
+		../../qt5pi/include/QtCore/qlocale.h \
+		../../qt5pi/include/QtCore/qvariant.h \
+		../../qt5pi/include/QtCore/qshareddata.h \
+		../../qt5pi/include/QtCore/qvector.h \
+		../../qt5pi/include/QtCore/qpoint.h \
+		../../qt5pi/include/QtCore/qset.h \
+		../../qt5pi/include/QtCore/qcontiguouscache.h \
+		../../qt5pi/include/QtCore/qsharedpointer.h \
+		../../qt5pi/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Buttoncontrol.o Buttoncontrol.cpp
 
 Fileoperations.o: Fileoperations.cpp Fileoperations.h \
 		../../qt5pi/include/QtCore/QObject \
@@ -893,7 +1032,26 @@ Led.o: Led.cpp Led.h \
 		../../qt5pi/include/QtCore/qvarlengtharray.h \
 		../../qt5pi/include/QtCore/qcontainerfwd.h \
 		../../qt5pi/include/QtCore/qobject_impl.h \
-		Fileoperations.h
+		Fileoperations.h \
+		Buttoncontrol.h \
+		../../qt5pi/include/QtCore/QTimer \
+		../../qt5pi/include/QtCore/qtimer.h \
+		../../qt5pi/include/QtCore/qbasictimer.h \
+		../../qt5pi/include/QtCore/QDebug \
+		../../qt5pi/include/QtCore/qdebug.h \
+		../../qt5pi/include/QtCore/qhash.h \
+		../../qt5pi/include/QtCore/qmap.h \
+		../../qt5pi/include/QtCore/qtextstream.h \
+		../../qt5pi/include/QtCore/qiodevice.h \
+		../../qt5pi/include/QtCore/qlocale.h \
+		../../qt5pi/include/QtCore/qvariant.h \
+		../../qt5pi/include/QtCore/qshareddata.h \
+		../../qt5pi/include/QtCore/qvector.h \
+		../../qt5pi/include/QtCore/qpoint.h \
+		../../qt5pi/include/QtCore/qset.h \
+		../../qt5pi/include/QtCore/qcontiguouscache.h \
+		../../qt5pi/include/QtCore/qsharedpointer.h \
+		../../qt5pi/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Led.o Led.cpp
 
 main.o: main.cpp ../../qt5pi/include/QtGui/QGuiApplication \
@@ -992,7 +1150,11 @@ main.o: main.cpp ../../qt5pi/include/QtGui/QGuiApplication \
 		../../qt5pi/include/QtQml/qqmlcontext.h \
 		Led.h \
 		../../qt5pi/include/QtCore/QObject \
-		Fileoperations.h
+		Fileoperations.h \
+		Buttoncontrol.h \
+		../../qt5pi/include/QtCore/QTimer \
+		../../qt5pi/include/QtCore/qtimer.h \
+		../../qt5pi/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 qrc_qml.o: qrc_qml.cpp 
@@ -1000,6 +1162,9 @@ qrc_qml.o: qrc_qml.cpp
 
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
+
+moc_Buttoncontrol.o: moc_Buttoncontrol.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Buttoncontrol.o moc_Buttoncontrol.cpp
 
 moc_Fileoperations.o: moc_Fileoperations.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Fileoperations.o moc_Fileoperations.cpp

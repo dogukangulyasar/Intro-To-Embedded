@@ -2,7 +2,7 @@
 #define LED_H
 #include <QObject>
 #include "Fileoperations.h"
-
+#include "Buttoncontrol.h"
 class Led : public QObject
 {
 Q_OBJECT
@@ -15,6 +15,7 @@ public:
 private:
         QString status;
         Fileoperations fo;
+        Buttoncontrol bc; //When we create it will automatically start reading the file. Because I defined timer in the Constructor of bc.
 
 signals:
         void setOn();
