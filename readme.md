@@ -200,3 +200,14 @@ make -j8
 scp _filename_ pi@_hostname_:/home/pi
 ```
 These codes will cross compile your project fully.
+
+# Qt Application Development Part 3
+
+After all these preparation process, I started to developing a project for that controlling the led which is connected to the raspberry pi3 with the physical and non-physical buttons. I firstly create a GUI for the project. 
+
+"GUI"
+
+When I creating GUI I planned that user can be able to control the led from the application (On / Off buttons at the GUI) or physcial button. So there is 2 buttons on the GUI as On/Off there is one image as default **Off** and the text which is giving information about led status.
+
+
+

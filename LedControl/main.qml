@@ -15,7 +15,6 @@ Window {
                                 bulbOn.visible = true
                                 bulbOff.visible = false
                         }
-
                 }
                 Button {
                         id: btnOff
@@ -43,11 +42,13 @@ Window {
                 }
                 Image {
                         id: bulbOn
+                        visible: led.status==="on" ? true : false
                         source: "images/aspi13190700012.jpg"
                         anchors.left: txtStatus.right
                 }
                 Image {
                         id: bulbOff
+                        visible: led.status==="off" ? true : false
                         source: "images/freestock_563599207.jpg"
                         anchors.left: txtStatus.right
                 }
