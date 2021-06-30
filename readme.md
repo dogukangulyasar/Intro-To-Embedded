@@ -207,7 +207,13 @@ After all these preparation process, I started to developing a project for that 
 
 "GUI"
 
-When I creating GUI I planned that user can be able to control the led from the application (On / Off buttons at the GUI) or physcial button. So there is 2 buttons on the GUI as On/Off there is one image as default **Off** and the text which is giving information about led status.
+When I creating GUI I planned that user can be able to control the led from the application (On / Off buttons at the GUI) or physcial button. So there is 2 buttons on the GUI as On/Off there is one image as default **Off** and the text which is giving information about led status. I created 3 different classes to make an OOP architecture my project. Which they:
+
+>Buttoncontrol -> Controls the button pin
+>Led -> Turning on or turning off the led. 
+>Fileoperations -> Changing pins
+
+These three files are connected each other. When program starts, buttoncontrol thread is running and controlling the button pin each 100ms. If the button pin changes 1 to 0 then sending signals to the Led class. Led class gets this signal and related this signal it sends a signal to the fileoperations class to changing the led's pin status. When fileoperations change and complete it's process give signals to the Led and Led changes the qml text such as Status:off/on, changing bulb icon.
 
 
 
