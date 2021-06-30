@@ -47,7 +47,7 @@ It's usage is:
 ```
 >chmod +x button.sh
 >sudo ./button.sh 5(button pin no) /home/desktop/.../(PINON.sh path) 18(led pin no)
-
+```
 
 #Raspberry Pi 3 B+ Qt Cross Compile Documentation (Part 2)
 
