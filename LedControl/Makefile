@@ -55,12 +55,14 @@ OBJECTS_DIR   = ./
 SOURCES       = Fileoperations.cpp \
 		Led.cpp \
 		main.cpp qrc_qml.cpp \
+		qrc_images.cpp \
 		moc_Fileoperations.cpp \
 		moc_Led.cpp
 OBJECTS       = Fileoperations.o \
 		Led.o \
 		main.o \
 		qrc_qml.o \
+		qrc_images.o \
 		moc_Fileoperations.o \
 		moc_Led.o
 DIST          = ../../qt5/mkspecs/features/spec_pre.prf \
@@ -216,6 +218,7 @@ DIST          = ../../qt5/mkspecs/features/spec_pre.prf \
 		../../qt5/mkspecs/features/qt_config.prf \
 		../../qt5/mkspecs/devices/linux-rasp-pi-g++/qmake.conf \
 		../../qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../qt5/mkspecs/features/exclusive_builds.prf \
 		../../qt5/mkspecs/features/toolchain.prf \
 		../../qt5/mkspecs/features/default_pre.prf \
@@ -401,6 +404,7 @@ Makefile: LedControl.pro ../../qt5/mkspecs/devices/linux-rasp-pi-g++/qmake.conf 
 		../../qt5/mkspecs/features/qt_config.prf \
 		../../qt5/mkspecs/devices/linux-rasp-pi-g++/qmake.conf \
 		../../qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../qt5/mkspecs/features/exclusive_builds.prf \
 		../../qt5/mkspecs/features/toolchain.prf \
 		../../qt5/mkspecs/features/default_pre.prf \
@@ -419,7 +423,8 @@ Makefile: LedControl.pro ../../qt5/mkspecs/devices/linux-rasp-pi-g++/qmake.conf 
 		../../qt5/mkspecs/features/yacc.prf \
 		../../qt5/mkspecs/features/lex.prf \
 		LedControl.pro \
-		qml.qrc
+		qml.qrc \
+		images.qrc
 	$(QMAKE) -o Makefile LedControl.pro
 ../../qt5/mkspecs/features/spec_pre.prf:
 ../../qt5/mkspecs/common/unix.conf:
@@ -574,6 +579,7 @@ Makefile: LedControl.pro ../../qt5/mkspecs/devices/linux-rasp-pi-g++/qmake.conf 
 ../../qt5/mkspecs/features/qt_config.prf:
 ../../qt5/mkspecs/devices/linux-rasp-pi-g++/qmake.conf:
 ../../qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../qt5/mkspecs/features/exclusive_builds.prf:
 ../../qt5/mkspecs/features/toolchain.prf:
 ../../qt5/mkspecs/features/default_pre.prf:
@@ -593,6 +599,7 @@ Makefile: LedControl.pro ../../qt5/mkspecs/devices/linux-rasp-pi-g++/qmake.conf 
 ../../qt5/mkspecs/features/lex.prf:
 LedControl.pro:
 qml.qrc:
+images.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile LedControl.pro
 
@@ -607,7 +614,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents qml.qrc $(DISTDIR)/
+	$(COPY_FILE) --parents qml.qrc images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents Fileoperations.h Led.h $(DISTDIR)/
 	$(COPY_FILE) --parents Fileoperations.cpp Led.cpp main.cpp $(DISTDIR)/
@@ -634,13 +641,19 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_qml.cpp
+compiler_rcc_make_all: qrc_qml.cpp qrc_images.cpp
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_qml.cpp
+	-$(DEL_FILE) qrc_qml.cpp qrc_images.cpp
 qrc_qml.cpp: qml.qrc \
 		../../qt5/bin/rcc \
 		main.qml
 	/home/dgulyasar/raspi/qt5/bin/rcc -name qml qml.qrc -o qrc_qml.cpp
+
+qrc_images.cpp: images.qrc \
+		../../qt5/bin/rcc \
+		images/aspi13190700012.jpg \
+		images/freestock_563599207.jpg
+	/home/dgulyasar/raspi/qt5/bin/rcc -name images images.qrc -o qrc_images.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
@@ -984,6 +997,9 @@ main.o: main.cpp ../../qt5pi/include/QtGui/QGuiApplication \
 
 qrc_qml.o: qrc_qml.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_qml.o qrc_qml.cpp
+
+qrc_images.o: qrc_images.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
 
 moc_Fileoperations.o: moc_Fileoperations.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Fileoperations.o moc_Fileoperations.cpp

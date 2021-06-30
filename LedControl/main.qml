@@ -10,14 +10,22 @@ Window {
                 Button {
                         id: btnOn
                         text: "On"
-                        onClicked: led.setStatusOn()
-                }
+                        onClicked: function () {
+                                led.setStatusOn()
+                                bulbOn.visible = true
+                                bulbOff.visible = false
+                        }
 
+                }
                 Button {
                         id: btnOff
                         anchors.left: btnOn.right
                         text: "Off"
-                        onClicked: led.setStatusOff()
+                        onClicked: function() {
+                                led.setStatusOff()
+                                bulbOn.visible = false
+                                bulbOff.visible = true
+                        }
                 }
 
                 Text{
@@ -26,11 +34,22 @@ Window {
                         text: "Status: "
                         visible: true
                 }
+
                 Text{
                         anchors.left: txtInfo.right
                         id: txtStatus
                         text: led.status
                         visible: true
+                }
+                Image {
+                        id: bulbOn
+                        source: "images/aspi13190700012.jpg"
+                        anchors.left: txtStatus.right
+                }
+                Image {
+                        id: bulbOff
+                        source: "images/freestock_563599207.jpg"
+                        anchors.left: txtStatus.right
                 }
         }
 
