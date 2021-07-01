@@ -3,3 +3,4 @@
 qrc_*
 moc_*
 *.gitignore
+Makefile
