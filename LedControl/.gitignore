@@ -1,0 +1,4 @@
+*.pro.user
+*.o
+qrc_*
+moc_*
