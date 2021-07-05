@@ -2,57 +2,61 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.0
 Window {
+        property string btnPin: app.buttonPinValue
+        property string ledPin: app.ledPinValue
         width: 640
         height: 480
+        id: wndMain
         visible: true
-        title: qsTr("Hello World")
-        Item {
-                Button {
-                        id: btnOn
-                        text: "On"
-                        onClicked: function () {
-                                led.setStatusOn()
-                                bulbOn.visible = true
-                                bulbOff.visible = false
-                        }
+        title: qsTr("Led Control")
+                TextArea{
+                        id: txtLedNum
+                        placeholderText: "Enter Led Pin number"
                 }
+                TextArea{
+                        id: txtButtonNum
+                        anchors.left: txtLedNum.right
+                        anchors.leftMargin: 5
+                        placeholderText: "Enter Button Pin number"
+                        width: 300
+                }
+
                 Button {
-                        id: btnOff
-                        anchors.left: btnOn.right
-                        text: "Off"
+                        id: btnGetPins
+                        anchors.leftMargin: 5
+                        anchors.top: txtLedNum.bottom
+                        text: "Get Pin Numbers"
                         onClicked: function() {
-                                led.setStatusOff()
-                                bulbOn.visible = false
-                                bulbOff.visible = true
+                                app.setPins(txtLedNum.text, txtButtonNum.text)
                         }
                 }
+                        Text {
+                                id: ledPinInfo
+                                anchors.top: btnGetPins.bottom
+                                text: "Led Pin: "
+                        }
 
-                Text{
-                        anchors.left: btnOff.right
-                        id: txtInfo
-                        text: "Status: "
-                        visible: true
-                }
+                        Text {
+                                id: ledPin
+                                anchors.top: btnGetPins.bottom
+                                anchors.left: ledPinInfo.right
+                                text: app.ledPin ? app.ledPin : "Not defined"
+                        }
 
-                Text{
-                        anchors.left: txtInfo.right
-                        id: txtStatus
-                        text: led.status
-                        visible: true
-                }
-                Image {
-                        id: bulbOn
-                        visible: led.status==="on" ? true : false
-                        source: "images/aspi13190700012.jpg"
-                        anchors.left: txtStatus.right
-                }
-                Image {
-                        id: bulbOff
-                        visible: led.status==="off" ? true : false
-                        source: "images/freestock_563599207.jpg"
-                        anchors.left: txtStatus.right
-                }
+                        Text {
+                                id: buttonPinInfo
+                                anchors.top: btnGetPins.bottom
+                                anchors.left: ledPin.right
+                                anchors.leftMargin: 5
+                                text: "Button Pin: "
+                        }
+                        Text {
+                                id: buttonPin
+                                anchors.left: buttonPinInfo.right
+                                anchors.leftMargin: 5
+                                anchors.top: btnGetPins.bottom
+                                text: app.buttonPin ? app.buttonPin : "Not defined"
+                        }
+
         }
 
-
-}
