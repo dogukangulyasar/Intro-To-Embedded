@@ -7,13 +7,13 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        Applicationmanager.cpp \
-        LedControl.cpp \
-        PinControl.cpp \
-        main.cpp
+        Sources/Pincontroller.cpp \
+        Sources/Pinmodel.cpp \
+        Sources/Pinoperation.cpp \
+        Sources/Pinview.cpp \
+        Sources/main.cpp
 
-RESOURCES += qml.qrc \
-    images.qrc
+RESOURCES += Resources/qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -27,6 +27,7 @@ else: unix:!android: target.path = /home/pi/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    Applicationmanager.h \
-    LedControl.h \
-    PinControl.h
+    Headers/Pincontroller.h \
+    Headers/Pinmodel.h \
+    Headers/Pinoperation.h \
+    Headers/Pinview.h

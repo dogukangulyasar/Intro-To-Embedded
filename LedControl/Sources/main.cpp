@@ -1,10 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "Led.h"
-#include "Fileoperations.h"
-#include "Applicationmanager.h"
-
+#include "Headers/Pinview.h"
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -14,14 +11,11 @@ int main(int argc, char *argv[])
         QGuiApplication app(argc, argv);
 
         QQmlApplicationEngine engine;
-
-
         /*Context Part*/
-        ApplicationManager appM;
+        Pinview pv;
         QQmlContext *context = new QQmlContext(engine.rootContext());
-        engine.rootContext()->setContextProperty("app",&appM);
+        engine.rootContext()->setContextProperty("app",&pv);
         /*Context Part*/
-
         const QUrl url(QStringLiteral("qrc:/main.qml"));
         QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                          &app, [url](QObject *obj, const QUrl &objUrl) {
