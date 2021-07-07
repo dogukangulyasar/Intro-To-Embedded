@@ -7,7 +7,37 @@ Window {
         height: 480
         visible: true
         title: qsTr("Led Controller")
+        Image {
+                id: imgOn
+                source: "on.png"
+                visible: app.ledStatus === "1" ? true:false
+                x: (parent.width - width) / 2
+                y: (parent.height - height) / 2
+                MouseArea {
+                           anchors.fill: parent
+                           onClicked: function(){
+                                   app.setOff(txtLed.text, "off");
+                                   imgOff.visible = true
+                                   imgOn.visible = false
+                           }
+                }
+        }
+        Image {
+                id: imgOff
+                source: "off.png"
+                visible: true
+                x: (parent.width - width) / 2
+                y: (parent.height - height) / 2
+                MouseArea {
+                           anchors.fill: parent
+                           onClicked: function(){
+                                   app.setOn(txtLed.text, "on");
+                                   imgOff.visible = false
+                                   imgOn.visible = true
+                           }
 
+                }
+        }
         Item {
                 TextArea {
                         id: txtLed
@@ -58,5 +88,6 @@ Window {
                         anchors.top: txtLedValue.bottom
                         anchors.left: txtButtonInfo.right
                 }
+
         }
 }

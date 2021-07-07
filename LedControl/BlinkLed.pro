@@ -13,7 +13,8 @@ SOURCES += \
         Sources/Pinview.cpp \
         Sources/main.cpp
 
-RESOURCES += Resources/qml.qrc
+RESOURCES += Resources/qml.qrc \
+    Resources/Images.qrc
 
 LIBS += -L/usr/local/include -lwiringPi
 
