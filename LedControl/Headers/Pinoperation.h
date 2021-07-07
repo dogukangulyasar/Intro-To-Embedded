@@ -6,6 +6,8 @@
 #include "Headers/Pinmodel.h"
 #include <iostream>
 #include <fstream>
+#include <wiringPi.h>
+#include <softPwm.h>
 
 ///CLASS FOR THE FILE OPERATIONS
 class Pinoperation : public QObject
@@ -17,11 +19,13 @@ public:
 public slots:
         void ledControl(QString status, Pinmodel ledP); //For controlling led
         void readButton(); //For reading button every 1 second
-        void startThread(Pinmodel ledP, Pinmodel btnP); //Starting the thread for the reading button every 1s.
+        void startThread(Pinmodel ledP, Pinmodel btnP); //Starting the thread for the reading button every 1s.;
+
 
 private:
         Pinmodel ledPin;
         Pinmodel buttonPin;
+        int pwm = 0;
 };
 
 #endif // PINOPERATION_H
